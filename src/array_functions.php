@@ -10,16 +10,16 @@ namespace Spatie;
  *
  * @return mixed
  */
-function array_rand_value(array $array, $numReq = 1)
+function array_rand_value(array $array = [], $numReq = 1)
 {
     if (!count($array)) {
-        return;
+        return [];
     }
 
     $keys = array_rand($array, $numReq);
 
     if ($numReq === 1) {
-        return $array[$keys];
+        return [$array[$keys]];
     }
 
     return array_intersect_key($array, array_flip($keys));
@@ -31,10 +31,13 @@ function array_rand_value(array $array, $numReq = 1)
  *
  * @param array $array
  *
- * @return mixed
+ * @return null|mixed
  */
-function array_rand_weighted(array $array)
+function array_rand_weighted(array $array = [])
 {
+    if(empty($array))
+        return null;
+
     $options = [];
 
     foreach ($array as $option => $weight) {
@@ -43,7 +46,7 @@ function array_rand_weighted(array $array)
         }
     }
 
-    return array_rand_value($options);
+    return array_rand_value($options)[0];
 }
 
 /**
