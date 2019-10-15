@@ -18,7 +18,8 @@ class ArrayRandValueTest extends TestCase
      */
     public function it_can_handle_an_empty_array()
     {
-        $this->assertNull(array_rand_value([]));
+        $this->assertIsArray(array_rand_value([]));
+        $this->assertCount(0, array_rand_value([]));
     }
 
     /**
@@ -27,7 +28,7 @@ class ArrayRandValueTest extends TestCase
     public function it_can_get_a_random_value()
     {
         $testArrayValues = array_values($this->testArray);
-        $randomArrayValue = array_rand_value($this->testArray);
+        $randomArrayValue = array_rand_value($this->testArray)[0];
 
         $this->assertContains($randomArrayValue, $testArrayValues);
     }
